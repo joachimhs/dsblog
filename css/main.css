@@ -1,0 +1,8 @@
+#header {
+    background: #dddcc4;
+    min-height: 200px;
+}
+
+#header ul {
+    list-style: none;
+}

@@ -1,19 +1,3 @@
-var Blog = Ember.Application.create({
-    ready: function() {
-    }
-});
-
-DS.RESTAdapter.reopen({
-    namespace: 'json'
-});
-
-Blog.Adapter = DS.RESTAdapter.extend();
-
-//Ember.Inflector.inflector.irregular('oppgave', 'oppgaver');
-
-Blog.ApplicationStore = DS.Store.extend({
-    adapter:  "Blog.Adapter"
-});
 Blog.BlogRoute = Ember.Route.extend({
     model: function() {
         var posts = [];
@@ -34,13 +18,4 @@ Blog.BlogRoute = Ember.Route.extend({
 
         return posts;
     }
-});
-Blog.Router.map(function() {
-    this.resource("index", {path: "/"}, function() {
-
-    });
-
-    this.resource("blog",{path: "/blog"}, function() {
-
-    });
 });

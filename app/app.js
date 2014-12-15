@@ -12,5 +12,5 @@ Blog.Adapter = DS.RESTAdapter.extend();
 //Ember.Inflector.inflector.irregular('oppgave', 'oppgaver');
 
 Blog.ApplicationStore = DS.Store.extend({
-    adapter:  "Kodegenet.Adapter"
+    adapter:  "Blog.Adapter"
 });
