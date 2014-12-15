@@ -4,7 +4,7 @@ var Blog = Ember.Application.create({
 });
 
 DS.RESTAdapter.reopen({
-    namespace: 'json'
+    namespace: 'json/data'
 });
 
 Blog.Adapter = DS.RESTAdapter.extend();
@@ -14,3 +14,4 @@ Blog.Adapter = DS.RESTAdapter.extend();
 Blog.ApplicationStore = DS.Store.extend({
     adapter:  "Blog.Adapter"
 });
+

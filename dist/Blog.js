@@ -4,7 +4,7 @@ var Blog = Ember.Application.create({
 });
 
 DS.RESTAdapter.reopen({
-    namespace: 'json'
+    namespace: 'json/data'
 });
 
 Blog.Adapter = DS.RESTAdapter.extend();
@@ -14,26 +14,28 @@ Blog.Adapter = DS.RESTAdapter.extend();
 Blog.ApplicationStore = DS.Store.extend({
     adapter:  "Blog.Adapter"
 });
+
+
+Blog.BlogController = Ember.ArrayController.extend({
+    sortProperties: ['dato'],
+    sortAscending: true
+});
 Blog.BlogRoute = Ember.Route.extend({
     model: function() {
-        var posts = [];
-
-        posts.pushObject(Ember.Object.create({
-            "id": "post_1",
-            "tittel": "Inlegg 1",
-            "ingress": "Ingress tekst.Ingress tekst.Ingress tekst.",
-            "dato": "2014-12-15"
-        }));
-
-        posts.pushObject(Ember.Object.create({
-            "id": "post_2",
-            "tittel": "Inlegg 2",
-            "ingress": "Ingress tekst2.Ingress tekst2.Ingress tekst2.",
-            "dato": "2014-12-11"
-        }));
-
-        return posts;
+        return this.store.find("post");
     }
+});
+Ember.Handlebars.registerBoundHelper("dato", function(param) {
+     if (param) {
+         var dateString = param.getDay() + "/" + (param.getMonth() +1) + "/" + param.getFullYear();
+         return dateString;
+     }
+});
+Blog.Post = DS.Model.extend({
+    ingress: DS.attr('string'),
+    dato: DS.attr('date'),
+    tittel: DS.attr('string'),
+    content: DS.attr('string')
 });
 Blog.Router.map(function() {
     this.resource("index", {path: "/"}, function() {
@@ -41,6 +43,6 @@ Blog.Router.map(function() {
     });
 
     this.resource("blog",{path: "/blog"}, function() {
-
+        this.route("post", {path: "/post/:post_id"}); //blog.post blog/post
     });
 });
