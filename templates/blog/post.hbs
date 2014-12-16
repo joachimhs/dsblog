@@ -3,7 +3,7 @@
     <div class="blogDate">{{dato dato}}</div>
     <div class="ingress">{{ingress}}</div>
 
-    <div class="blogContent">{{content.content}}</div>
+    <div class="blogContent">{{safeString content.content}}</div>
 
     {{link-to "Tilbake til blogg" "blog"}}
 </div>

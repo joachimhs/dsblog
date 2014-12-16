@@ -16,9 +16,17 @@ Blog.ApplicationStore = DS.Store.extend({
 });
 
 
-Blog.BlogController = Ember.ArrayController.extend({
+Blog.ApplicationRoute = Ember.Route.extend({
+    model: function() {
+        /*return Ember.RSVP.hash({
+            translations: this.store.find('translation'),
+            pages: this.store.find('page')
+        });*/
+    }
+});
+Blog.BlogIndexController = Ember.ArrayController.extend({
     sortProperties: ['dato'],
-    sortAscending: true
+    sortAscending: false
 });
 Blog.BlogRoute = Ember.Route.extend({
     model: function() {
@@ -30,6 +38,11 @@ Ember.Handlebars.registerBoundHelper("dato", function(param) {
          var dateString = param.getDay() + "/" + (param.getMonth() +1) + "/" + param.getFullYear();
          return dateString;
      }
+});
+Ember.Handlebars.registerBoundHelper("safeString", function(param) {
+    if (param) {
+        return new Handlebars.SafeString(param);
+    }
 });
 Blog.Post = DS.Model.extend({
     ingress: DS.attr('string'),

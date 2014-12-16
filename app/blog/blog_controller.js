@@ -1,4 +1,4 @@
-Blog.BlogController = Ember.ArrayController.extend({
+Blog.BlogIndexController = Ember.ArrayController.extend({
     sortProperties: ['dato'],
-    sortAscending: true
+    sortAscending: false
 });
